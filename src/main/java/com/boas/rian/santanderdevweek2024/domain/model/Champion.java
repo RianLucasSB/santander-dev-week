@@ -7,7 +7,12 @@ public record Champion(
         String lore,
         String imageUrl
 ) {
-    public void test(){
-        Champion champion = new Champion(1L, "Lee", "JG", "", "");
-    }
+   public String generateContextByQuestion(String question){
+       return """
+       Pergunta: %s
+       Nome do campeão: %s
+       Função: %s
+       Lore (História): %s
+               """.formatted(question, this.name, this.role, this.lore);
+   }
 }

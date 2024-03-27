@@ -1,4 +1,4 @@
-package com.boas.rian.santanderdevweek2024.adapters;
+package com.boas.rian.santanderdevweek2024.adapters.out;
 
 import com.boas.rian.santanderdevweek2024.domain.model.Champion;
 import com.boas.rian.santanderdevweek2024.domain.ports.ChampionsRepository;
@@ -35,7 +35,7 @@ public class ChampionsJdbcRepository implements ChampionsRepository {
 
     @Override
     public Optional<Champion> findOne(Long id) {
-        Champion champion = jdbcTemplate.queryForObject("SELECT * FROM champions WHERE ID = ?", rowMapper, id);
-        return Optional.ofNullable(champion);
+        List<Champion> champions = jdbcTemplate.query("SELECT * FROM champions WHERE ID = ?", rowMapper, id);
+        return champions.stream().findFirst();
     }
 }
